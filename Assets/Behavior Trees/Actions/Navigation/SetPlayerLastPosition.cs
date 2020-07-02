@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using BBUnity.Actions;
+﻿using BBUnity.Actions;
 using Pada1.BBCore;
 using Pada1.BBCore.Tasks;
 using UnityEngine;
@@ -12,13 +10,6 @@ public class SetPlayerLastPosition : GOAction
 
     [OutParam("PlayerLastPosition")] public Vector3 playerLastPosition { get; set; }
 
-    public override void OnStart()
-    {
-        playerLastPosition = player.transform.position;
-    }
-
-    public override TaskStatus OnUpdate()
-    {
-        return TaskStatus.COMPLETED;
-    }
+    public override void OnStart() => playerLastPosition = player.transform.position;
+    public override TaskStatus OnUpdate() => TaskStatus.COMPLETED;
 }

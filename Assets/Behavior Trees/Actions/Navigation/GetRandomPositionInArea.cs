@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using BBUnity.Actions;
+﻿using BBUnity.Actions;
 using Pada1.BBCore;
 using Pada1.BBCore.Tasks;
 using UnityEngine;
@@ -20,8 +18,5 @@ public class GetRandomPositionInArea : GOAction
             Random.Range(centerPosition.z - 2, centerPosition.z + 2));
     }
 
-    public override TaskStatus OnUpdate()
-    {
-        return TaskStatus.COMPLETED;
-    }
+    public override TaskStatus OnUpdate() => TaskStatus.COMPLETED;
 }

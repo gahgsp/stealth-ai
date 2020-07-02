@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using BBUnity.Conditions;
+﻿using BBUnity.Conditions;
 using Pada1.BBCore;
 using UnityEngine;
 
@@ -8,9 +6,6 @@ using UnityEngine;
 public class HasLostPlayerInSight : GOCondition
 {
     [InParam("PlayerLastPosition")] public Vector3 playerLastPosition;
-    
-    public override bool Check()
-    {
-        return playerLastPosition != Vector3.zero;
-    }
+
+    public override bool Check() => playerLastPosition != Vector3.zero;
 }

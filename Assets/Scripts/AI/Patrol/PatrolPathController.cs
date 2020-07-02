@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PatrolPath : MonoBehaviour
+public class PatrolPathController : MonoBehaviour
 {
 
-    public Transform[] waypoints;
+    public PatrolPath patrolPath;
     
     // Start is called before the first frame update
     void Start()

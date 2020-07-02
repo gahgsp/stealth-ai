@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using BBUnity.Actions;
-using BBUnity.Conditions;
+﻿using BBUnity.Conditions;
 using Pada1.BBCore;
 using UnityEngine;
 

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using BBUnity.Actions;
+﻿using BBUnity.Actions;
 using Pada1.BBCore;
 using Pada1.BBCore.Tasks;
 using UnityEngine;
@@ -12,13 +10,7 @@ public class FindNextWaypoint : GOAction
 
     [OutParam("NextWaypoint")] public Vector3 nextWaypoint { get; set; }
 
-    public override void OnStart()
-    {
-        nextWaypoint = gameObject.GetComponent<PatrolPathController>().patrolPath.waypoints[waypointIndex].position;
-    }
-
-    public override TaskStatus OnUpdate()
-    {
-        return TaskStatus.COMPLETED;
-    }
+    public override void OnStart() => nextWaypoint = gameObject.GetComponent<PatrolPathController>().patrolPath.waypoints[waypointIndex].position;
+    
+    public override TaskStatus OnUpdate() => TaskStatus.COMPLETED;
 }
