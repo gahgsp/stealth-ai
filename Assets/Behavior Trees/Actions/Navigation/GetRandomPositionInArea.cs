@@ -12,11 +12,21 @@ public class GetRandomPositionInArea : GOAction
 
     public override void OnStart()
     {
+        GenerateRandomPosition();
+    }
+
+    public override TaskStatus OnUpdate() => TaskStatus.COMPLETED;
+
+    private void GenerateRandomPosition()
+    {
+        if (centerPosition == null || centerPosition == Vector3.zero)
+        {
+            centerPosition = gameObject.transform.position;
+        }
+        
         randomPositionInArea = new Vector3(
             Random.Range(centerPosition.x - 2, centerPosition.x + 2),
             centerPosition.y,
             Random.Range(centerPosition.z - 2, centerPosition.z + 2));
     }
-
-    public override TaskStatus OnUpdate() => TaskStatus.COMPLETED;
 }
