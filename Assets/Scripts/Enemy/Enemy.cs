@@ -4,33 +4,56 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
 
+    [Header("State Materials")]
     [SerializeField] private Material _patrolMaterial;
     [SerializeField] private Material _alertMaterial;
     
-    private bool _isDead;
-    private bool _isAlerted;
+    // Cached references.
+    private BehaviorExecutor _behaviorExecutor;
+    private MeshRenderer _meshRenderer;
+    private NavMeshAgent _navMeshAgent;
+    private PatrolPathController _patrolPathController;
+
+    private void Awake()
+    {
+        _behaviorExecutor = GetComponent<BehaviorExecutor>();
+        _meshRenderer = GetComponent<MeshRenderer>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        _patrolPathController = GetComponent<PatrolPathController>();
+    }
 
     private void Update()
     {
-        GetComponent<MeshRenderer>().material = _isAlerted ? _alertMaterial : _patrolMaterial;
+        _meshRenderer.material = IsAlerted ? _alertMaterial : _patrolMaterial;
     }
 
     public void Kill()
     {
-        GetComponent<NavMeshAgent>().enabled = false;
-        GetComponent<BehaviorExecutor>().enabled = false;
-        GetComponent<PatrolPathController>().enabled = false;
+        DisableComponents();
+        RotateBody();
+        IsDead = true;
+    }
+
+    private void DisableComponents()
+    {
+        _navMeshAgent.enabled = false;
+        _behaviorExecutor.enabled = false;
+        _patrolPathController.enabled = false;
+    }
+
+    private void RotateBody()
+    {
         // TODO: Refactor the lines below!
         transform.localRotation = Quaternion.Euler(-90f, 0f, 0f);
         transform.position = new Vector3(transform.position.x, 0.65f, transform.position.z);
-        _isDead = true;
     }
 
-    public bool IsDead => _isDead;
-
-    public bool IsAlerted
+    public void Decompose()
     {
-        get => _isAlerted;
-        set => _isAlerted = value;
+        Destroy(gameObject);
     }
+
+    public bool IsDead { get; private set; }
+
+    public bool IsAlerted { get; set; }
 }

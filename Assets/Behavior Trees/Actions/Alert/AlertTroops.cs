@@ -7,7 +7,7 @@ using UnityEngine;
 public class AlertTroops: GOAction
 {
     
-    [InParam("Range")] public float range;
+    [InParam("Range", DefaultValue = 30f)] public float range;
     
     public override void OnStart()
     {

@@ -5,6 +5,7 @@ public class CharacterMovement : MonoBehaviour
 
     [SerializeField] private float _moveSpeed = 5f;
 
+    // Cached references.
     private CharacterController _characterController;
 
     private float _ccOriginalHeight;

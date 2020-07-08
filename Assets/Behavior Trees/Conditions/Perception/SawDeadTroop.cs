@@ -6,7 +6,9 @@ using UnityEngine;
 public class SawDeadTroop : GOCondition
 {
 
-    [InParam("Range")] public float range;
+    [InParam("Range", DefaultValue = 10f)] public float range;
+    [InParam("FieldOfView", DefaultValue = 45f)] public int fieldOfView;
+    [InParam("ViewDistance", DefaultValue = 10f)] public int viewDistance;
     
     public override bool Check()
     {
@@ -29,14 +31,15 @@ public class SawDeadTroop : GOCondition
                 var raycastDirection = objectsInRange[i].gameObject.transform.position - gameObject.transform.position;
         
                 // Compares the angle between the NPC's forward vector with the raycast direction calculated above.
-                if (Vector3.Angle(raycastDirection, gameObject.transform.forward) < 45f) // TODO: Create input for fov!
+                if (Vector3.Angle(raycastDirection, gameObject.transform.forward) < fieldOfView) // TODO: Create input for fov!
                 {
                     // Checks if the dead body is visible to the NPC within the view distance.
-                    if (Physics.Raycast(gameObject.transform.position, raycastDirection, out hit, 10f)) // TODO: Create input for maxDistance!
+                    if (Physics.Raycast(gameObject.transform.position, raycastDirection, out hit, viewDistance)) // TODO: Create input for maxDistance!
                     {
                         var collidedObjectEnemyScript = hit.collider.gameObject.GetComponent<Enemy>();
                         if (collidedObjectEnemyScript != null && collidedObjectEnemyScript.IsDead)
                         {
+                            collidedObjectEnemyScript.Decompose();
                             return true;
                         }
                     }

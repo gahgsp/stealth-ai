@@ -6,10 +6,8 @@ using UnityEngine;
 public class IsPlayerInSight : GOCondition
 {
     [InParam("Player")] public GameObject player;
-
-    [InParam("FieldOfView")] public int fieldOfView;
-
-    [InParam("ViewDistance")] public int viewDistance;
+    [InParam("FieldOfView", DefaultValue = 30f)] public int fieldOfView;
+    [InParam("ViewDistance", DefaultValue = 10f)] public int viewDistance;
     
     public override bool Check()
     {
